@@ -8,6 +8,11 @@ Next, we display the quotes to the users and ask them to guess the author correc
 
 After every incorrect guess, the player gets a hint as to what the correct answer is and when the guesses are exhausted, the application automatically tells the user the answer.
 
-# sleep(3)
-
 The three seconds delay from the time module was necessary to ensure that there is a delay of three between successive pages in order to scrape ethically and not over burden the websites server thereby slowing access to it and its user experience for other users visiting it. It is the morally right thing to do when scraping through multiple pages of a website.
+
+# NOTE
+
+1. The scraper.py is the initial complete code, my legacy code from which I seperated everything for flexibility's sake.
+2. The csv_scraper.py file does the scraping and saves the file to a comma seperated values (csv) file.
+3. The game_proper.py file as the name suggests is the actual file to call when we want to play the game.
+4. The quotes.csv file is the file containing all of the quotes, authors and the links to the biographies.
