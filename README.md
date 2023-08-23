@@ -7,3 +7,7 @@ The goal of this project is to loop through all of the pages of the website, and
 Next, we display the quotes to the users and ask them to guess the author correctly within a space of four(4) possible guesses. For every incorrect guesses, the number of possible guesses decrement until the user runs out of guesses where the game ends. But if the user gets the guess correctly, the user has an opportunity to either play again or not.
 
 After every incorrect guess, the player gets a hint as to what the correct answer is and when the guesses are exhausted, the application automatically tells the user the answer.
+
+# sleep(3)
+
+The three seconds delay from the time module was necessary to ensure that there is a delay of three between successive pages in order to scrape ethically and not over burden the websites server thereby slowing access to it and its user experience for other users visiting it. It is the morally right thing to do when scraping through multiple pages of a website.
