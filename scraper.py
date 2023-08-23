@@ -10,7 +10,6 @@ url = "/page/1"
 
 user_name = input('Welcome to the John Igoche guessing game, please enter you username : ')
 
-
 while url:
     res = requests.get(f"{first_url}{url}")
     print(f"Currently scrapping {first_url}{url}")
@@ -28,31 +27,41 @@ while url:
     next_page = soup.find(class_="next")
     url = next_page.find("a")["href"] if next_page else None
     # sleep(3)
+def game_on():
+        quote = choice(quotes_list)
+        guesses_left = 4
 
-quote = choice(quotes_list)
-guesses_left = 4
+        print(quote["text"])
+        print(quote["author"])
+        guess = ""
+        while guess.lower() != quote["author"].lower() and guesses_left > 0:
+            guess = input(f"This quotes was made by who? Guesses remaining: {guesses_left} \n")
+            guesses_left -= 1
+            if guess.lower() == quote["author"].lower():
+                print(f"Hello {user_name} you got it right!")
+                break
+            if guesses_left == 3:
+                res = requests.get(f"{first_url}{quote['author-bio']}")
+                soup = BeautifulSoup(res.text, "html.parser")
+                birth_date = soup.find(class_="author-born-date").getText()
+                birth_place = soup.find(class_="author-born-location").getText()
+                print(f"Hint: The author was born on {birth_date} {birth_place}")
+            elif guesses_left == 2:
+                print(f"Hint : The author's name begins with {quote['author'][0]}")
+            elif guesses_left == 1:
+                last_initial = quote["author"].split(' ')[1][0]
+                print(f"Hint : The author's last name starts with {last_initial}")
+            else:
+                print(f'You ran out of guess. The right answer is {quote["author"]}')
+                print(f"")
 
-print(quote["text"])
-print(quote["author"])
-guess = ""
-while guess.lower() != quote["author"].lower() and guesses_left > 0:
-    guess = input(f"This quotes was made by who? Guesses remaining: {guesses_left} \n")
-    guesses_left -= 1
-    if guess.lower() == quote["author"].lower():
-        print(f"Hello {user_name} you got it right!")
-        break
-    if guesses_left == 3:
-        res = requests.get(f"{first_url}{quote['author-bio']}")
-        soup = BeautifulSoup(res.text, "html.parser")
-        birth_date = soup.find(class_="author-born-date").getText()
-        birth_place = soup.find(class_="author-born-location").getText()
-        print(f"Hint: The author was born on {birth_date} {birth_place}")
-    elif guesses_left == 2:
-        print(f"Hint : The author's name begins with {quote['author'][0]}")
-    elif guesses_left == 1:
-        last_initial = quote["author"].split(' ')[1][0]
-        print(f"Hint : The author's last name starts with {last_initial}")
-    else:
-        print(f'You ran out of guess. The right answer is {quote["author"]}')
-        print(f"")
+        again = ''
+        while again.lower() not in ('y', 'yes', 'n', 'no'):
+            again = input("Would you like to play again (y/n)?")
+            if again.lower() in ('yes','y'):
+                print(f'Okay {user_name}, lets go again.')
+                return game_on()
+            else:
+                print(f"Okay {user_name}, goodbye!")
 
+game_on()
