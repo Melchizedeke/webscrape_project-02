@@ -24,11 +24,11 @@ def scrape_quotes():
                 "author":quote.find(class_="author").getText(),
                 "author-bio":quote.find("a")["href"]
             })
-        #Moving to the next page
-        next_page = soup.find(class_="next")
-        url = next_page.find("a")["href"] if next_page else None
-        # sleep(3)
-        return quotes_list
+            #Moving to the next page
+            next_page = soup.find(class_="next")
+            url = next_page.find("a")["href"] if next_page else None
+            # sleep(3)
+    return quotes_list
     
 def game_on(quotes):
     quote = choice(quotes)

@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 from time import sleep
 from random import choice
-
+from csv import DictWriter
 
 
 first_url = "https://quotes.toscrape.com"
@@ -25,12 +25,18 @@ def scrape_quotes():
                 "author":quote.find(class_="author").getText(),
                 "author-bio":quote.find("a")["href"]
             })
-        #Moving to the next page
-        next_page = soup.find(class_="next")
-        url = next_page.find("a")["href"] if next_page else None
-        # sleep(3)
-        return quotes_list
+            #Moving to the next page
+            next_page = soup.find(class_="next")
+            url = next_page.find("a")["href"] if next_page else None
+            # sleep(3)
+    return quotes_list
 
 quotes = scrape_quotes()
 
-#write all of the quotes to a CSV file
+# saving quotes to a csv file
+with open("quotes.csv", "w", encoding='utf-8') as file:
+    header = ["text", "author", "author-bio"]
+    csv_writer = DictWriter(file, fieldnames=header)
+    csv_writer.writeheader()
+    for quote in quotes:
+        csv_writer.writerow(quote)
