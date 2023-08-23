@@ -40,6 +40,7 @@ while guess.lower() != quote["author"].lower() and guesses_left > 0:
     guesses_left -= 1
     if guess.lower() == quote["author"].lower():
         print(f"Hello {user_name} you got it right!")
+        break
     if guesses_left == 3:
         res = requests.get(f"{first_url}{quote['author-bio']}")
         soup = BeautifulSoup(res.text, "html.parser")
