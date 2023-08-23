@@ -2,7 +2,7 @@
 
 A webscraping game project to scrape the website : https://quotes.toscrape.com/ to get quotes from selected famous authors using "bs4 - BeautifulSoup" and "requests".
 
-The goal of this project is to loop through all of the pages of the website, and for each given quote, grab the the quote itself, the name of the author as well as the href of the link to the author's bio.
+The goal of this project is to loop through all of the pages of the website, and for each given quote, grab the the quote itself, the name of the author as well as the href of the link to the author's bio and store them in a list object.
 
 Next, we display the quotes to the users and ask them to guess the author correctly within a space of four(4) possible guesses. For every incorrect guesses, the number of possible guesses decrement until the user runs out of guesses where the game ends. But if the user gets the guess correctly, the user has an opportunity to either play again or not.
 
