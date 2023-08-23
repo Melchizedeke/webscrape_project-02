@@ -2,6 +2,7 @@
 import requests
 from bs4 import BeautifulSoup
 from time import sleep
+from random import choice
 
 quotes_list = []
 first_url = "https://quotes.toscrape.com"
@@ -24,8 +25,4 @@ while url:
     #Moving to the next page
     next_page = soup.find(class_="next")
     url = next_page.find("a")["href"] if next_page else None
-    sleep(3)
-
-# print(next_page.find("a")["href"])
-
-print(quotes_list)
+    # sleep(3)
