@@ -7,7 +7,7 @@ from csv import DictWriter
 
 
 first_url = "https://quotes.toscrape.com"
-user_name = input('Welcome to the John Igoche guessing game, please enter you username : ')
+# user_name = input('Welcome to the John Igoche guessing game, please enter you username : ')
 
 def scrape_quotes():
     quotes_list = []
@@ -28,15 +28,19 @@ def scrape_quotes():
             #Moving to the next page
             next_page = soup.find(class_="next")
             url = next_page.find("a")["href"] if next_page else None
-            # sleep(3)
+            sleep(3)
     return quotes_list
 
-quotes = scrape_quotes()
+
 
 # saving quotes to a csv file
-with open("quotes.csv", "w", encoding='utf-8') as file:
-    header = ["text", "author", "author-bio"]
-    csv_writer = DictWriter(file, fieldnames=header)
-    csv_writer.writeheader()
-    for quote in quotes:
-        csv_writer.writerow(quote)
+def write_quotes(quotes):
+    with open("quotes.csv", "w", encoding='utf-8') as file:
+        header = ["text", "author", "author-bio"]
+        csv_writer = DictWriter(file, fieldnames=header)
+        csv_writer.writeheader()
+        for quote in quotes:
+            csv_writer.writerow(quote)
+
+quotes = scrape_quotes()
+write_quotes(quotes)
